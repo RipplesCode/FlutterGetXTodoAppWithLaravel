@@ -20,4 +20,57 @@ class TaskProvider extends GetConnect {
       return Future.error(exception.toString());
     }
   }
+
+  //Save Data
+  Future<String> saveTask(Map data) async {
+    try
+    {
+      final response = await post(
+          "http://192.168.43.152:81/TodoApp/public/api/saveTask",data);
+      if (response.status.hasError) {
+        return Future.error(response.statusText);
+      } else {
+        return  response.body['result'];
+      }
+    }
+    catch(exception)
+    {
+      return Future.error(exception.toString());
+    }
+
+  }
+
+  // Update Data
+  Future<String> updateTask(Map data) async {
+    try {
+      final response = await post(
+          "http://192.168.43.152:81/TodoApp/public/api/updateTask", data);
+      if (response.status.hasError) {
+        return Future.error(response.statusText);
+      } else {
+        return response.body['result'];
+      }
+    }
+    catch(exception)
+    {
+      return Future.error(exception.toString());
+    }
+  }
+// Delete Data
+  Future<String> deleteTask(Map data) async {
+    try{
+      final response = await post(
+          "http://192.168.43.152:81/TodoApp/public/api/deleteTask",data);
+      if (response.status.hasError) {
+        return Future.error(response.statusText);
+      } else {
+        return response.body['result'];
+      }
+    }
+    catch(exception)
+    {
+      return Future.error(exception.toString());
+    }
+
+  }
 }
